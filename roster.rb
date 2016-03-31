@@ -28,7 +28,7 @@ def main
             printf("Reached rate limit. Waiting %d seconds to make new request\n", delta)
             sleep(delta)
         end
-	    url = build_url(host, sport, 'roster', team['team_id'], 'json', nil)
+        url = build_url(host, sport, 'roster', team['team_id'], 'json', nil)
         data, xmlstats_remaining, xmlstats_reset = http_get(url)
         roster = JSON.parse(data)
 
@@ -67,13 +67,13 @@ def http_get(url)
 end
 
 def build_url(host, sport, endpoint, id, format, parameters)
-	path = '/'
-	path += [sport, endpoint, id].compact * '/'
-	path += '.' + format
-	uri = URI::HTTPS.new('https', nil, host, nil, nil, path, nil, nil, nil)
-	if parameters
-		uri.query = URI.encode(parameters.map{|k,v| "#{k}=#{v}"}.join('&'))
-	end
+    path = '/'
+    path += [sport, endpoint, id].compact * '/'
+    path += '.' + format
+    uri = URI::HTTPS.new('https', nil, host, nil, nil, path, nil, nil, nil)
+    if parameters
+        uri.query = URI.encode(parameters.map{|k,v| "#{k}=#{v}"}.join('&'))
+    end
     return uri
 end
 
